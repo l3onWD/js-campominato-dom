@@ -59,6 +59,30 @@ const playGame = () => {
     }
 
 
+    //*** GENERATE UNIQUE BOMBS ***//
+    const generateUniqueBombs = (number, maxCells) => {
+
+        const bombs = [];
+
+        // Populate list
+        while (bombs.length < number) {
+
+            let randomNumber;
+
+            // Get a random cell until is unique
+            do {
+                randomNumber = Math.floor(Math.random() * maxCells) + 1;
+
+            } while (bombs.includes(randomNumber));
+
+            // Add unique number inside the list
+            bombs.push(randomNumber);
+        }
+
+        return bombs;
+    }
+
+
     //*** ON CELL CLICK ***//
     const onCellClick = (ev) => {
 
@@ -85,7 +109,11 @@ const playGame = () => {
     ----------------*/
 
     //*** DATA ***//
+    // Game score
     let score = 0;
+
+    // Game bombs
+    const maxBombs = 16;
 
 
     //*** GET DIFFICULTY INPUT ***//
@@ -117,6 +145,10 @@ const playGame = () => {
     // Set cell size
     const root = document.querySelector(':root');
     root.style.setProperty('--grid-cols', cellsPerRow);
+
+    // Generate bombs
+    const bombs = generateUniqueBombs(maxBombs, cellsTotalNumber);
+    console.log(bombs);
 
     // Delete all previous cells
     gridElem.innerHTML = '';
