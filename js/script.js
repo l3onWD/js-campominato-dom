@@ -59,11 +59,36 @@ const playGame = () => {
     }
 
 
+    //*** ON CELL CLICK ***//
+    const onCellClick = (ev) => {
+
+        // Get current cell clicked
+        const cell = ev.target;
+
+        // Check in alrady clicked
+        if(cell.classList.contains('clicked')) return;
+
+        // Increment score
+        score++;
+        console.log(score);
+
+        // Print content cell
+        //console.log(cell.innerText);
+
+        // Change cell color
+        cell.classList.add('clicked');
+    }
+
+
     /* --------------
     * INIT
     ----------------*/
 
-    //*** GET DIFFICULTY INOUT ***//
+    //*** DATA ***//
+    let score = 0;
+
+
+    //*** GET DIFFICULTY INPUT ***//
     const difficulty = parseInt(difficultyElem.value);
     let cellsPerRow;
 
@@ -105,20 +130,13 @@ const playGame = () => {
     // Create all cell based on difficulty
     for (let i = 1; i <= cellsTotalNumber; i++) {
        
+        // Get current cell
         const cell = createCell(i);
         
-        //*** CLICK CELL ***//
-        cell.addEventListener('click', () => {
-            
-            // Print content cell
-            console.log(cell.innerText);
+        // Append on click event
+        cell.addEventListener('click', onCellClick);
 
-            // Change cell color
-            cell.classList.add('clicked');
-
-        });
-
-        // Append cell inside grid
+        // Append current cell inside grid
         gridElem.appendChild(cell);
     }
 

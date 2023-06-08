@@ -24,7 +24,7 @@
         - collego l'evento click alla cella
     - **FINE**
 - **QUANDO** _"premo su una cella"_
-    - **SE** _"la cella è stata già cliccata"_
+    - [ml-1] **SE** _"la cella è stata già cliccata"_
         - **RITORNO**
     - [ml-1] Aumento il punteggio
     - Stampo il suo contenuto
