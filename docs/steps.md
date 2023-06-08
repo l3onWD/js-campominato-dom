@@ -79,14 +79,15 @@
             - La segno come bomba
     - **FINE**
 - [###] **Mostra le celle adiacenti**_"dato il numero di cella e la lista di bombe"_
-    - _"Recupero le celle adiacenti"_
-    - **FINCHE** _"ho celle da scorrere"_
+    - _"Recupero i numeri di celle adiacenti"_
+    - Recupero tutte le celle
+    - **FINCHE** _"ho numeri di celle da scorrere"_
         - Recupero la cella corrente
         - **SE** _"non è una bomba"_ **E** _"non è già cliccata"_
             - La segno come cliccata
             - Aumento il punteggio
     - **FINE**
-- [###] **Recupero le celle adiacenti** _"dato il suo numero"_
+- [###] **Recupero i numeri di celle adiacenti** _"dato il suo numero"_
     - Calcolo col e row del numero di cella
     - Preparo una lista di numeri di celle
     - **FINCHE** _"devo scorrere le colonne (x)"_
