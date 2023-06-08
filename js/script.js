@@ -8,9 +8,6 @@
 
 //*** START GAME ***//
 const playGame = () => {
-    /* EXTERNAL VARIABLES
-        - all DOM elements
-    */
 
     /* --------------
     * FUNCTIONS
@@ -57,10 +54,7 @@ const playGame = () => {
 
     //*** SHOW END MESSAGE ***//
     const showEndMessage = (score, hasWon) => {
-        /* EXTERNAL VARIABLES
-            - messageElem
-        */
-
+      
         // Prepare paragraphs
         let msg = '<p class="mb-2">HAI VINTO!!</p>';
         const scoreMsg = `<p>Il tuo punteggio è ${score} punti!</p>`
@@ -100,7 +94,7 @@ const playGame = () => {
 
 
     //*** SHOW ADJACENT CELLS ***//
-    const showAdjacentCells = (cellIndex, bombs) => {
+    const showAdjacentCells = (cellIndex, bombs, cols) => {
 
         /* EXTERNAL VARIABLES
             - cellsPerRow
@@ -111,7 +105,7 @@ const playGame = () => {
         ----------------*/
 
         //*** GET ADJACENT CELLS INDEX ***//
-        const getAdjacentCellsIndex = (cellIndex, cellsPerRow) => {
+        const getAdjacentCellsIndex = (cellIndex, cols) => {
 
             /* --------------
             * FUNCTIONS
@@ -139,7 +133,7 @@ const playGame = () => {
             ----------------*/
 
             // Get coords from index
-            const coords = getCoordsFromIndex(cellIndex, cellsPerRow);
+            const coords = getCoordsFromIndex(cellIndex, cols);
 
             // Get row and col
             const row = coords[0];
@@ -152,18 +146,18 @@ const playGame = () => {
             // Get cells
             let adjacentCellsIndex = [];
 
-            // Cicle through adjacent cells
+            // Cicle through adjacent cells (3x3)
             for (let i = row - 1; i <= row + 1; i++) {
                 
                 for (let j = col - 1; j <= col + 1; j++) {
 
                     // Check if index is inside the grid
-                    if(isInsideGrid(i, j, cellsPerRow, cellsPerRow)) {
+                    if(isInsideGrid(i, j, cols, cols)) {
 
                         // Get index from coords
-                        const currentCellIndex = getIndexFromCoords(i, j, cellsPerRow);
+                        const currentCellIndex = getIndexFromCoords(i, j, cols);
 
-                        // Translate index basic value and add to cells list
+                        // Add to cells list
                         adjacentCellsIndex.push(currentCellIndex);
                     }
                 }
@@ -177,7 +171,7 @@ const playGame = () => {
         * INIT
         ----------------*/
         
-        // Get surround cells indexes
+        // Get surround cells indexes (current cell included)
         const surroundCellsIndexes = getAdjacentCellsIndex(cellIndex, cellsPerRow);
 
         // Get all cells
