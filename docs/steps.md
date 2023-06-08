@@ -5,9 +5,11 @@
 ## Steps:
 
 - Recupero gli elementi
+- [ml-5] Recupero la modale dei messaggi
 - Setto la grandezza della griglia
 - **QUANDO** _"premo play"_
     - [ml-1] Preparo il punteggio attuale
+    - [ml-5] Segno che la partita non è finita
     - Recupero la difficoltà
     - **IN CASO** _"la difficoltà è 1 (facile)"_
         - Le celle per lato sono 10
@@ -27,6 +29,8 @@
         - collego l'evento click alla cella
     - **FINE**
 - **QUANDO** _"premo su una cella"_
+    - [ml-5] **SE** _"la partita è finita"_
+        - **RITORNO**
     - [ml-1] **SE** _"la cella è stata già cliccata"_
         - **RITORNO**
     - Stampo il suo contenuto
@@ -34,10 +38,12 @@
     - [ml-3] Recupero il numero di cella
     - [ml-3] **SE** _"la cella è una bomba"_
         - Aggiungo il colore della cella bomba
+        - [ml-5] Setto la partita come finita
         - _"Mostro un messaggio"_
     - [ml-3] **ALTRIMENTI**
         - [ml-1] Aumento il punteggio
         - [ml-4] **SE** _"il punteggio è uguale al punteggio massimo"_
+            - [ml-5] Setto la partita come finita
             - _"Mostro un messaggio"_
     - **FINE**
 - **Creo una cella** _"data la grandezza e un numero"_
@@ -53,3 +59,9 @@
         - **FINCHE** _"la cella bomba è già presente"_
         - Aggiungo la cella bomba alla lista
     - **RITORNO** _"La lista di celle bomba"_
+- [ml-3] **Mostro un messaggio** _"dato il punteggio e se ha vinto"_
+    - Preparo un messaggio di vittoria con il punteggio
+    - **SE** _"ha perso"_
+        - Aggiorno il messaggio con la sconfitta
+    - Stampo il messaggio
+    - [ml-5] Mostro il messaggio nella modale
