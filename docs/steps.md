@@ -7,7 +7,9 @@
 - Recupero gli elementi
 - Setto la grandezza della griglia
 - **QUANDO** _"premo play"_
-    - [ml-1] Salvo il punteggio attuale
+    - [ml-1] Preparo il punteggio attuale
+    - [ml-2] _"Genero 16 bombe"_
+    - [ml-2] Salvo le bombe generate
     - Recupero la difficoltà
     - **IN CASO** _"la difficoltà è 1 (facile)"_
         - Le celle per lato sono 10
@@ -35,3 +37,11 @@
     - Setto le dimensioni dalla grandezza
     - Appendo il numero all'elemento
     - **RITORNO** _"l'elemento creato"_
+- [ml-2] **Genero Bombe** _"dato il numero e il range di celle"_
+    - Preparo una lista di celle bomba vuota
+    - **FINCHE** _"non ho il numero di celle bomba"_
+        - **RIPETO**
+            - Genero una cella bomba casuale nel range fornito
+        - **FINCHE** _"la cella bomba è già presente"_
+        - Aggiungo la cella bomba alla lista
+    - **RITORNO** _"La lista di celle bomba"_
