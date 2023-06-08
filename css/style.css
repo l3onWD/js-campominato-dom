@@ -11,6 +11,10 @@
     /* Layout */
     --layout-top: 70px;
     --layout-bottom: 50px;
+
+    /* Grid */
+    --grid-size: 400px;
+    --grid-cols: 10;
 }
 
 
@@ -127,6 +131,9 @@ main {
 
 /*** GAME GRID ***/
 #game-grid {
+    width: var(--grid-size);
+    height: var(--grid-size);
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -142,6 +149,9 @@ main {
 
 /* Cells */
 .game-cell {
+    width: calc(100% / var(--grid-cols));
+    height: calc(100% / var(--grid-cols));
+
     display: flex;
     align-items: center;
     justify-content: center;

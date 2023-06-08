@@ -42,14 +42,10 @@ Al termine della partita, il software deve comunicare il punteggio, cioè il num
  * @param {Number} number - the number to show as content
  * @returns {Node}
  */
-const createCell = (size, number) => {
+const createCell = (number) => {
 
     // Create node
     const cell = document.createElement('div');
-
-    // Set size
-    cell.style.width = size + 'px';
-    cell.style.height = size + 'px';
 
     // Set properties
     cell.classList.add('game-cell');
@@ -72,15 +68,9 @@ const gridElem = document.getElementById('game-grid');
 
 
 //*** PARAMETERS ***//
-const gridSize = 400;
 const cellsPerRowEasy = 10;
 const cellsPerRowMedium = 9;
 const cellsPerRowHard = 7;
-
-
-//*** SET GRID SIZE ***//
-gridElem.style.width = gridSize + 'px';
-gridElem.style.height = gridSize + 'px';
 
 
 // ! Log
@@ -88,10 +78,6 @@ console.log('### Elementi DOM:');
 console.log('Select: ' + difficultyElem);
 console.log('Bottone: ' + playBtn);
 console.log('Grid: ' + gridElem);
-console.log('---------------');
-console.log('### Dimensioni griglia:');
-console.log('Larghezza: ' + gridSize + 'px');
-console.log('Altezza: ' + gridSize + 'px');
 console.log('----------- DONE -----------');
 
 
@@ -128,7 +114,10 @@ playBtn.addEventListener('click', () => {
     //*** POPULATE GRID ***//
     // Calculate Grid data
     const cellsTotalNumber = cellsPerRow * cellsPerRow;
-    const cellsSize = gridSize / cellsPerRow;
+    
+    // Set cell size
+    const root = document.querySelector(':root');
+    root.style.setProperty('--grid-cols', cellsPerRow);
 
     // Delete all previous cells
     gridElem.innerHTML = '';
@@ -136,7 +125,7 @@ playBtn.addEventListener('click', () => {
     // Create all cell based on difficulty
     for (let i = 1; i <= cellsTotalNumber; i++) {
        
-        const cell = createCell(cellsSize, i);
+        const cell = createCell(i);
         
         //*** CLICK CELL ***//
         cell.addEventListener('click', () => {
