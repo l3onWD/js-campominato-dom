@@ -36,60 +36,33 @@ Al termine della partita, il software deve comunicare il punteggio, cioè il num
 /* -----------------------------------------
 * FUNCTIONS
 -------------------------------------------*/
-/**
- * Create a squared cell.
- * @param {Number} size - the size of the cell in px
- * @param {Number} number - the number to show as content
- * @returns {Node}
- */
-const createCell = (number) => {
 
-    // Create node
-    const cell = document.createElement('div');
+//*** START GAME ***//
+const playGame = () => {
 
-    // Set properties
-    cell.classList.add('game-cell');
-    cell.append(number);
+    /* --------------
+    * INNER FUNCTIONS
+    ----------------*/
+
+    //*** CREATE CELL ***//
+    const createCell = (number) => {
+
+        // Create node
+        const cell = document.createElement('div');
     
-    return cell;
-}
+        // Set properties
+        cell.classList.add('game-cell');
+        cell.append(number);
+        
+        return cell;
+    }
 
 
+    /* --------------
+    * INIT
+    ----------------*/
 
-/* -----------------------------------------
-* INIT
--------------------------------------------*/
-console.log('----------- INIT -----------');
-
-//*** DOM ELEMENTS ***//
-const difficultyElem = document.getElementById('game-difficulty');
-const playBtn = document.getElementById('game-play-btn');
-const gridElem = document.getElementById('game-grid');
-
-
-//*** PARAMETERS ***//
-const cellsPerRowEasy = 10;
-const cellsPerRowMedium = 9;
-const cellsPerRowHard = 7;
-
-
-// ! Log
-console.log('### Elementi DOM:');
-console.log('Select: ' + difficultyElem);
-console.log('Bottone: ' + playBtn);
-console.log('Grid: ' + gridElem);
-console.log('----------- DONE -----------');
-
-
-
-/* -----------------------------------------
-* LOGIC
--------------------------------------------*/
-
-//*** CLICK PLAY ***//
-playBtn.addEventListener('click', () => {
-
-    //*** GET DIFFICULTY ***//
+    //*** GET DIFFICULTY INOUT ***//
     const difficulty = parseInt(difficultyElem.value);
     let cellsPerRow;
 
@@ -111,7 +84,7 @@ playBtn.addEventListener('click', () => {
     }
 
     
-    //*** POPULATE GRID ***//
+    //*** INIT GRID ***//
     // Calculate Grid data
     const cellsTotalNumber = cellsPerRow * cellsPerRow;
     
@@ -122,6 +95,12 @@ playBtn.addEventListener('click', () => {
     // Delete all previous cells
     gridElem.innerHTML = '';
 
+
+    /* --------------
+    * LOGIC
+    ----------------*/
+
+    //*** CREATE AND HANDLE CELLS ***//
     // Create all cell based on difficulty
     for (let i = 1; i <= cellsTotalNumber; i++) {
        
@@ -142,4 +121,39 @@ playBtn.addEventListener('click', () => {
         gridElem.appendChild(cell);
     }
 
-});
+}
+
+
+
+/* -----------------------------------------
+* INIT
+-------------------------------------------*/
+
+//*** DOM ELEMENTS ***//
+const difficultyElem = document.getElementById('game-difficulty');
+const playBtn = document.getElementById('game-play-btn');
+const gridElem = document.getElementById('game-grid');
+
+
+//*** PARAMETERS ***//
+const cellsPerRowEasy = 10;
+const cellsPerRowMedium = 9;
+const cellsPerRowHard = 7;
+
+
+// ! Log
+console.log('----------- INIT -----------');
+console.log('### Elementi DOM:');
+console.log('Select: ' + difficultyElem);
+console.log('Bottone: ' + playBtn);
+console.log('Grid: ' + gridElem);
+console.log('----------- INIT DONE -----------');
+
+
+
+/* -----------------------------------------
+* LOGIC
+-------------------------------------------*/
+
+//*** CLICK PLAY ***//
+playBtn.addEventListener('click', playGame);
