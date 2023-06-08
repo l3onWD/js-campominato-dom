@@ -17,9 +17,9 @@
         - Le celle per lato sono 7
     - Calcolo la grandezza delle celle
     - Calcolo il numero di celle
-    - [ml-4] Calcolo il punteggiomassimo
     - [ml-2] _"Genero 16 bombe"_
     - [ml-2] Salvo le bombe generate
+    - [ml-4] Calcolo il punteggio massimo
     - Svuoto la griglia
     - **FINCHE** _"non ho tutte le celle"_
         - _"Creo una cella"_
