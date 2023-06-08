@@ -115,9 +115,10 @@ const playGame = () => {
         // Get cell number
         const cellNumber = parseInt(cell.innerText);
 
-        // Is a bomb
+        
         if(bombs.includes(cellNumber)) {
 
+            //*** GAME LOST ***//
             // Change cell color
             cell.classList.add('bomb');
 
@@ -129,6 +130,12 @@ const playGame = () => {
             
             // Increment score
             score++;
+
+            //*** GAME WON ***//
+            if(score === maxScore) {
+                // Show a message
+                showEndMessage(score, true);
+            }
         }
         
     }
@@ -179,6 +186,9 @@ const playGame = () => {
     // Generate bombs
     const bombs = generateUniqueBombs(maxBombs, cellsTotalNumber);
     console.log(bombs);
+
+    // Calculate max score
+    const maxScore = cellsTotalNumber - maxBombs;
 
     // Delete all previous cells
     gridElem.innerHTML = '';
