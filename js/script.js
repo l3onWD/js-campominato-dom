@@ -17,14 +17,15 @@ const playGame = () => {
     ----------------*/
 
     //*** CREATE CELL ***//
-    const createCell = (number) => {
+    const createCell = (index) => {
 
         // Create node
         const cell = document.createElement('div');
     
         // Set properties
         cell.classList.add('game-cell');
-        cell.append(number);
+        cell.append(index + 1);
+        cell.dataset.index = index;
         
         return cell;
     }
@@ -42,7 +43,7 @@ const playGame = () => {
 
             // Get a random cell until is unique
             do {
-                randomNumber = Math.floor(Math.random() * maxCells) + 1;
+                randomNumber = Math.floor(Math.random() * maxCells);
 
             } while (bombs.includes(randomNumber));
 
@@ -88,7 +89,7 @@ const playGame = () => {
 
             // Get current cell data
             const cell = cells[i];
-            const cellNumber = parseInt(cell.innerText);
+            const cellNumber = parseInt(cell.dataset.index);
 
             // Change properties
             cell.classList.add('clicked');// is clicked
@@ -137,11 +138,8 @@ const playGame = () => {
             * INIT
             ----------------*/
 
-            // Translate index basic value from 1 to 0
-            const translatedCellIndex = cellIndex - 1;
-
             // Get coords from index
-            const coords = getCoordsFromIndex(translatedCellIndex, cellsPerRow);
+            const coords = getCoordsFromIndex(cellIndex, cellsPerRow);
 
             // Get row and col
             const row = coords[0];
@@ -154,21 +152,19 @@ const playGame = () => {
             // Get cells
             let adjacentCellsIndex = [];
 
-            // Cicle vertical
+            // Cicle through adjacent cells
             for (let i = row - 1; i <= row + 1; i++) {
                 
-                // Cicle horizontal
                 for (let j = col - 1; j <= col + 1; j++) {
 
-
-                    // Check if inside the grid
+                    // Check if index is inside the grid
                     if(isInsideGrid(i, j, cellsPerRow, cellsPerRow)) {
 
                         // Get index from coords
-                        const cellIndex = getIndexFromCoords(i, j, cellsPerRow);
+                        const currentCellIndex = getIndexFromCoords(i, j, cellsPerRow);
 
                         // Translate index basic value and add to cells list
-                        adjacentCellsIndex.push(cellIndex + 1);
+                        adjacentCellsIndex.push(currentCellIndex);
                     }
                 }
             }
@@ -195,7 +191,7 @@ const playGame = () => {
         for (let i = 0; i < surroundCellsIndexes.length; i++) {
 
             const currentCellIndex = surroundCellsIndexes[i];
-            const currentCell = cells[currentCellIndex - 1];// Translate min index from 1 to 0
+            const currentCell = cells[currentCellIndex];
             
             // Check if is cliccable
             if(!currentCell.classList.contains('clicked') &&  !bombs.includes(currentCellIndex)) {
@@ -240,7 +236,7 @@ const playGame = () => {
 
         //*** CHECK IF IS A BOMB ***//
         // Get cell number
-        const cellNumber = parseInt(cell.innerText);
+        const cellNumber = parseInt(cell.dataset.index);
 
         // Is a bomb cell 
         if(bombs.includes(cellNumber)) {
@@ -351,7 +347,7 @@ const playGame = () => {
 
     //*** CREATE AND HANDLE CELLS ***//
     // Create all cell based on difficulty
-    for (let i = 1; i <= cellsTotalNumber; i++) {
+    for (let i = 0; i < cellsTotalNumber; i++) {
        
         // Get current cell
         const cell = createCell(i);
