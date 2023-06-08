@@ -41,7 +41,7 @@
         - Aggiungo il colore della cella bomba
         - [ml-5] Setto la partita come finita
         - _"Mostro un messaggio"_
-        - [bonus-s] _"Coloro tutte le celle"_
+        - [bonus-s] _"Mostro tutte le celle"_
     - [ml-3] **ALTRIMENTI**
         - [ml-1] Aumento il punteggio
         - [ml-4] **SE** _"il punteggio è uguale al punteggio massimo"_
@@ -67,7 +67,7 @@
         - Aggiorno il messaggio con la sconfitta
     - Stampo il messaggio
     - [ml-5] Mostro il messaggio nella modale
-- [bonus-s] **Coloro tutte le celle**
+- [bonus-s] **Mostro tutte le celle**
     - Recupero tutte le celle
     - **FINCHE** _"ho celle da scorrere"_
         - Recupero la cella corrente
