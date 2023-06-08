@@ -99,7 +99,7 @@ const playGame = () => {
 
 
     //*** SHOW ADJACENT CELLS ***//
-    const showAdjacentCells = (index, bombs) => {
+    const showAdjacentCells = (cellIndex, bombs) => {
 
         /* EXTERNAL VARIABLES
             - cellsPerRow
@@ -110,7 +110,7 @@ const playGame = () => {
         ----------------*/
 
         //*** GET ADJACENT CELLS INDEX ***//
-        const getAdjacentCellsIndex = (index, cellsPerRow) => {
+        const getAdjacentCellsIndex = (cellIndex, cellsPerRow) => {
 
             /* --------------
             * FUNCTIONS
@@ -138,10 +138,10 @@ const playGame = () => {
             ----------------*/
 
             // Translate index basic value from 1 to 0
-            const translatedIndex = index - 1;
+            const translatedCellIndex = cellIndex - 1;
 
             // Get coords from index
-            const coords = getCoordsFromIndex(translatedIndex, cellsPerRow);
+            const coords = getCoordsFromIndex(translatedCellIndex, cellsPerRow);
 
             // Get row and col
             const row = coords[0];
@@ -154,10 +154,10 @@ const playGame = () => {
             // Get cells
             let adjacentCellsIndex = [];
 
-            // Cicle horizontal
+            // Cicle vertical
             for (let i = row - 1; i <= row + 1; i++) {
                 
-                // Cicle vertical
+                // Cicle horizontal
                 for (let j = col - 1; j <= col + 1; j++) {
 
 
@@ -182,8 +182,8 @@ const playGame = () => {
         ----------------*/
         
         // Get surround cells indexes
-        const surroundCellsIndexes = getAdjacentCellsIndex(index, cellsPerRow);
-        
+        const surroundCellsIndexes = getAdjacentCellsIndex(cellIndex, cellsPerRow);
+
         // Get all cells
         const cells = document.querySelectorAll('.game-cell');
 
@@ -195,7 +195,7 @@ const playGame = () => {
         for (let i = 0; i < surroundCellsIndexes.length; i++) {
 
             const currentCellIndex = surroundCellsIndexes[i];
-            const currentCell = cells[currentCellIndex - 1];// Fix min index from 1 to 0
+            const currentCell = cells[currentCellIndex - 1];// Translate min index from 1 to 0
             
             // Check if is cliccable
             if(!currentCell.classList.contains('clicked') &&  !bombs.includes(currentCellIndex)) {
