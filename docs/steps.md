@@ -67,10 +67,11 @@
         - Aggiorno il messaggio con la sconfitta
     - Stampo il messaggio
     - [ml-5] Mostro il messaggio nella modale
-- [bonus-s] **Mostro tutte le celle**
+- [bonus-s] **Mostro tutte le celle** _"data la lista di bombe"_
     - Recupero tutte le celle
     - **FINCHE** _"ho celle da scorrere"_
         - Recupero la cella corrente
+        - Recupero il numero di cella
         - La segno come cliccata
         - **SE** _"la cella è una bomba"_
             - La segno come bomba
