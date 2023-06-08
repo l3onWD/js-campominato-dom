@@ -220,7 +220,7 @@ const playGame = () => {
     }
 
     
-    //*** INIT GRID ***//
+    //*** INIT GAME ***//
     // Calculate Grid data
     const cellsTotalNumber = cellsPerRow * cellsPerRow;
     
@@ -240,6 +240,9 @@ const playGame = () => {
 
     // Hide game messages
     messageElem.classList.remove('show');
+
+    // Change Button text
+    playBtn.innerText = 'Ricomincia';
 
 
     /* --------------
