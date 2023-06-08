@@ -7,6 +7,7 @@
 - Recupero gli elementi
 - Setto la grandezza della griglia
 - **QUANDO** _"premo play"_
+    - [ml-1] Salvo il punteggio attuale
     - Recupero la difficoltà
     - **IN CASO** _"la difficoltà è 1 (facile)"_
         - Le celle per lato sono 10
@@ -23,6 +24,9 @@
         - collego l'evento click alla cella
     - **FINE**
 - **QUANDO** _"premo su una cella"_
+    - **SE** _"la cella è stata già cliccata"_
+        - **RITORNO**
+    - [ml-1] Aumento il punteggio
     - Stampo il suo contenuto
     - Cambio il colore della cella
     - **FINE**
