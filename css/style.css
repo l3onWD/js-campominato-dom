@@ -47,6 +47,7 @@ select {
 * UTILS
 -------------------------------------------*/
 /*** MARGIN ***/
+/* Left */
 .ml-1 {
     margin-left: 0.5rem;
 }
@@ -55,10 +56,12 @@ select {
     margin-left: 1rem;
 }
 
+/* Bottom */
 .mb-2 {
     margin-bottom: 1rem;
 }
 
+/* Horizontal */
 .mx-1 {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
@@ -143,6 +146,7 @@ header > * {
 /* Logo */
 .logo {
     width: 65px;
+    
     display: block;
 }
 
