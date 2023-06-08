@@ -127,8 +127,8 @@ playBtn.addEventListener('click', () => {
     
     //*** POPULATE GRID ***//
     // Calculate Grid data
-    let cellsTotalNumber = cellsPerRow * cellsPerRow;
-    let cellsSize = gridSize / cellsPerRow;
+    const cellsTotalNumber = cellsPerRow * cellsPerRow;
+    const cellsSize = gridSize / cellsPerRow;
 
     // Delete all previous cells
     gridElem.innerHTML = '';
