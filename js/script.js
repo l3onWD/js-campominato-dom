@@ -98,6 +98,87 @@ const playGame = () => {
     }
 
 
+    //*** SHOW ADJACENT CELLS ***//
+    const showAdjacentCells = (index, bombs) => {
+
+        /* EXTERNAL VARIABLES
+            - cellsPerRow
+        */
+
+        /* --------------
+        * FUNCTIONS
+        ----------------*/
+
+        //*** GET ADJACENT CELLS INDEX ***//
+        const getAdjacentCellsIndex = (index, cellsPerRow) => {
+
+            // TODO Get coords from index
+            const coords = [1, 1];//! DEBUG
+            
+            // Get row and col
+            const row = coords[0];
+            const col = coords[1];
+
+            // Get cells
+            let adjacentCellsIndex = [];
+
+            // Cicle horizontal
+            for (let i = row - 1; i <= row + 1; i++) {
+                
+                // Cicle vertical
+                for (let j = col - 1; j <= col + 1; j++) {
+
+
+                    // Check if out of grid
+                    if(i > 0 && i <= cellsPerRow && j > 0 && j <= cellsPerRow) {
+
+                        // TODO Get index from coords
+                        const cellIndex = 1;//! DEBUG
+
+                        // Add to cells list
+                        adjacentCellsIndex.push(cellIndex);
+                    }
+                }
+            }
+            
+            return adjacentCellsIndex;
+        }
+
+
+        /* --------------
+        * INIT
+        ----------------*/
+        
+        // Get surround cells indexes
+        const surroundCellsIndexes = getAdjacentCellsIndex(index, cellsPerRow);
+        console.log(surroundCellsIndexes);
+        // Get all cells
+        const cells = document.querySelectorAll('.game-cell');
+
+
+        /* --------------
+        * LOGIC
+        ----------------*/
+
+        for (let i = 0; i < surroundCellsIndexes.length; i++) {
+
+            const currentCellIndex = surroundCellsIndexes[i];
+            const currentCell = cells[currentCellIndex - 1];// Fix min index from 1 to 0
+            
+            // Check if is cliccable
+            if(!currentCell.classList.contains('clicked') &&  !bombs.includes(currentCellIndex)) {
+
+                // Click the cell
+                currentCell.classList.add('clicked');
+
+                // Add to score
+                score++;
+            }
+            
+        }
+    }
+
+
     //*** ON CELL CLICK ***//
     const onCellClick = (ev) => {
 
@@ -148,6 +229,9 @@ const playGame = () => {
             // Increment score
             score++;
 
+            // Show adjacent cells 
+            showAdjacentCells(cellNumber, bombs);
+            console.log('Score: ' + score);
 
             //*** GAME WON ***//
             if(score === maxScore) {
