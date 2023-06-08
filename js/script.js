@@ -103,6 +103,27 @@ const playGame = () => {
     }
 
 
+    //*** SHOW ALL CELLS ***//
+    const showAllCells = (bombs) => {
+
+        // Get all cells
+        const cells = document.querySelectorAll('.game-cell');
+
+        // Show all cells
+        for (let i = 0; i < cells.length; i++) {
+
+            // Get current cell data
+            const cell = cells[i];
+            const cellNumber = parseInt(cell.innerText);
+
+            // Change properties
+            cell.classList.add('clicked');// is clicked
+
+            if(bombs.includes(cellNumber)) cell.classList.add('bomb');// is a bomb
+        }
+    }
+
+
     //*** ON CELL CLICK ***//
     const onCellClick = (ev) => {
 
@@ -134,7 +155,9 @@ const playGame = () => {
             // End Game
             gameEnded = true;
 
-            // Change cell color
+            // Show all cells
+            showAllCells(bombs);
+
             cell.classList.add('bomb');
 
             // Show a message
