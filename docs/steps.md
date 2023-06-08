@@ -87,13 +87,20 @@
             - La segno come cliccata
             - Aumento il punteggio
     - **FINE**
-- [###] **Recupero i numeri di celle adiacenti** _"dato il suo numero"_
-    - Calcolo col e row del numero di cella
+- [###] **Recupero i numeri di celle adiacenti** _"dato il suo numero e il numero di colonne"_
+    - _"Calcolo col e row dal numero di cella"_
     - Preparo una lista di numeri di celle
     - **FINCHE** _"devo scorrere le colonne (x)"_
         - **FINCHE** _"devo scorrere le righe (y)"_
             - **SE** _"Sono nella griglia"_
-                - Calcolo il numero della cella dalle coordinate
+                - _"Calcolo il numero della cella da row e col"_
                 - Aggiungo il numero di cella alla lista
     - **FINE**
+- [###] **Calcolo col e row dal numero di cella** _"dato il suo numero e il numero di colonne"_
+    - Calcolo la riga
+    - Calcolo la colonna
+    - **ROTORNO** _"riga e colonna"_
+- [###] **Calcolo il numero della cella da row e col** _"date row, col e il numero di colonne"_
+    - Calcolo l'indice
+    - **ROTORNO** _"l'indice"_
 - **FINE**
