@@ -28,9 +28,14 @@
 - **QUANDO** _"premo su una cella"_
     - [ml-1] **SE** _"la cella è stata già cliccata"_
         - **RITORNO**
-    - [ml-1] Aumento il punteggio
     - Stampo il suo contenuto
-    - Cambio il colore della cella
+    - Aggiungo il colore della cella cliccata
+    - [ml-3] Recupero il numero di cella
+    - [ml-3] **SE** _"la cella è una bomba"_
+        - Aggiungo il colore della cella bomba
+        - _"Genero un messaggio"_
+    - [ml-3] **ALTRIMENTI**
+        - [ml-1] Aumento il punteggio
     - **FINE**
 - **Creo una cella** _"data la grandezza e un numero"_
     - Creo un elemento
