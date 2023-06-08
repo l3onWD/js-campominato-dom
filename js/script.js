@@ -83,24 +83,54 @@ const playGame = () => {
     }
 
 
+    //*** SHOW END MESSAGE ***//
+    const showEndMessage = (score, hasWon) => {
+
+        let msg = `HAI VINTO!! Il tuo punteggio è ${score} punti!`;
+
+        // Check if is a victory or a lost
+        if(!hasWon) msg = `HAI PERSO!! Il tuo punteggio è ${score} punti!`;
+
+        // Show message
+        console.log(msg);
+    }
+
+
     //*** ON CELL CLICK ***//
     const onCellClick = (ev) => {
 
         // Get current cell clicked
         const cell = ev.target;
 
-        // Check in alrady clicked
+        //*** CHECK IF CLICKED ***//
         if(cell.classList.contains('clicked')) return;
-
-        // Increment score
-        score++;
-        console.log(score);
 
         // Print content cell
         //console.log(cell.innerText);
 
         // Change cell color
         cell.classList.add('clicked');
+
+        //*** CHECK IF IS A BOMB ***//
+        // Get cell number
+        const cellNumber = parseInt(cell.innerText);
+
+        // Is a bomb
+        if(bombs.includes(cellNumber)) {
+
+            // Change cell color
+            cell.classList.add('bomb');
+
+            // Show a message
+            showEndMessage(score, false);
+
+        } // Is a normal cell 
+        else {
+            
+            // Increment score
+            score++;
+        }
+        
     }
 
 

@@ -33,7 +33,7 @@
     - [ml-3] Recupero il numero di cella
     - [ml-3] **SE** _"la cella è una bomba"_
         - Aggiungo il colore della cella bomba
-        - _"Genero un messaggio"_
+        - _"Mostro un messaggio"_
     - [ml-3] **ALTRIMENTI**
         - [ml-1] Aumento il punteggio
     - **FINE**

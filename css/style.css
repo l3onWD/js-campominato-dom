@@ -170,6 +170,11 @@ main {
     color: #fff;
 }
 
+.game-cell.clicked.bomb {
+    background-color: var(--col-secondary);
+    color: #fff;
+}
+
 
 /*** FOOTER ***/
 footer {
