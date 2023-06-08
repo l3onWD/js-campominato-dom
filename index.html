@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <!-- * SETTINGS * -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Classe 100">
+
+        <!-- * RESOURCES * -->
+        <!-- Font Awesome 6 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <!-- Grid -->
+        <link rel="stylesheet" href="css/grid.css">
+        <!-- Style -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- * TITLE * -->
+        <title>Campo Minato</title>
+        
+    </head>
+    <body>
+        
+        <!-- Header -->
+        <header id="game-header" class="layout-top container">
+
+            <!-- Header Left -->
+            <div>
+                <img src="img/logo.png" alt="Logo" class="logo">
+                <h1>Campo Minato</h1>
+            </div>
+
+            <!-- Header Right -->
+            <form id="game-form">
+
+                <label for="game-difficulty">Difficoltà:</label>
+
+                <select id="game-difficulty" class="ml-1">
+                    <option value="1">Facile</option>
+                    <option value="2">Medio</option>
+                    <option value="3">Difficile</option>
+                </select>
+
+                <button class="btn btn-primary ml-2">Play</button>
+            </form>
+
+        </header>
+
+
+        <!-- Main Content -->
+        <main class="layout-main">
+            <!-- Game Grid -->
+            <div id="game-grid">
+                <p>Premi il tasto Play<br>per iniziare a giocare</p>
+            </div>
+
+        </main>
+
+
+        <!-- Game Footer -->
+        <footer class="layout-bottom container">
+            <p>Made with <i class="fas fa-heart"></i> by <a href="#">Boolean</a></p>
+        </footer>
+
+        
+        <!-- Script -->
+        <script src="js/script.js"></script>
+    </body>
+</html>

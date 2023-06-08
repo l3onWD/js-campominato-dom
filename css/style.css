@@ -1,0 +1,172 @@
+/* -----------------------------------------
+* VARIABLES
+-------------------------------------------*/
+:root {
+    /* Palette */
+    --col-cyan: #00ffff;
+    --col-primary: #4831f9;
+    --col-secondary: #ff0000;
+    --col-light: #faebd7;
+
+    /* Layout */
+    --layout-top: 70px;
+    --layout-bottom: 50px;
+}
+
+
+/* -----------------------------------------
+* RESETS
+-------------------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* -----------------------------------------
+* GENERICS
+-------------------------------------------*/
+body {
+    font-family: sans-serif;
+}
+
+select {
+    padding: 6px 12px;
+
+    font-size: 1rem;
+    border-radius: 6px;
+}
+
+
+/* -----------------------------------------
+* UTILS
+-------------------------------------------*/
+/*** MARGIN ***/
+.ml-1 {
+    margin-left: 0.5rem;
+}
+
+.ml-2 {
+    margin-left: 1rem;
+}
+
+.mx-1 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+
+/* -----------------------------------------
+* LAYOUT
+-------------------------------------------*/
+.layout-top {
+    height: var(--layout-top);
+}
+
+.layout-bottom {
+    height: var(--layout-bottom);
+}
+
+.layout-main {
+    height: calc(100vh - (var(--layout-top) + var(--layout-bottom)));
+
+    overflow: auto;
+}
+
+
+
+/* -----------------------------------------
+? ELEMENTS
+-------------------------------------------*/
+/*** BUTTONS ***/
+.btn {
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid transparent;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+
+    padding: 6px 20px;
+    border-radius: 6px;
+}
+
+.btn.btn-primary {
+    background-color: var(--col-primary);
+    color: #fff;
+}
+
+
+/*** HEADER ***/
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header > * {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    width: 65px;
+    display: block;
+}
+
+
+/*** MAIN CONTENT ***/
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--col-cyan);
+}
+
+
+/*** GAME GRID ***/
+#game-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Start Message */
+#game-grid > p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Cells */
+.game-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000;
+    background-color: var(--col-light);
+
+    cursor: pointer;
+}
+
+.game-cell:hover {
+    border-color: var(--col-secondary);
+}
+
+.game-cell.clicked {
+    background-color: var(--col-primary);
+    color: #fff;
+}
+
+
+/*** FOOTER ***/
+footer {
+    display: flex;
+    align-items: center;
+}
+
+/* -----------------------------------------
+? RESPONSIVE
+-------------------------------------------*/
