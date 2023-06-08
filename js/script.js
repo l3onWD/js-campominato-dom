@@ -112,13 +112,45 @@ const playGame = () => {
         //*** GET ADJACENT CELLS INDEX ***//
         const getAdjacentCellsIndex = (index, cellsPerRow) => {
 
-            // TODO Get coords from index
-            const coords = [1, 1];//! DEBUG
-            
+            /* --------------
+            * FUNCTIONS
+            ----------------*/
+
+            //*** GET COORDS FROM INDEX ***//
+            const getCoordsFromIndex = (index, cols) => {
+                const row = Math.floor(index / cols);
+                const col = index % cols;
+
+                return [row, col];
+            }
+
+
+            //*** GET INDEX FROM COORDS ***//
+            const getIndexFromCoords = (row, col, cols) => row * cols + col;
+
+
+            //*** IS INSIDE GRID ***//
+            const isInsideGrid = (row, col, rowMax, colMax) => row >= 0 && row < rowMax && col >= 0 && col < colMax;
+
+
+            /* --------------
+            * INIT
+            ----------------*/
+
+            // Translate index basic value from 1 to 0
+            const translatedIndex = index - 1;
+
+            // Get coords from index
+            const coords = getCoordsFromIndex(translatedIndex, cellsPerRow);
+
             // Get row and col
             const row = coords[0];
             const col = coords[1];
 
+
+            /* --------------
+            * LOGIC
+            ----------------*/
             // Get cells
             let adjacentCellsIndex = [];
 
@@ -129,14 +161,14 @@ const playGame = () => {
                 for (let j = col - 1; j <= col + 1; j++) {
 
 
-                    // Check if out of grid
-                    if(i > 0 && i <= cellsPerRow && j > 0 && j <= cellsPerRow) {
+                    // Check if inside the grid
+                    if(isInsideGrid(i, j, cellsPerRow, cellsPerRow)) {
 
-                        // TODO Get index from coords
-                        const cellIndex = 1;//! DEBUG
+                        // Get index from coords
+                        const cellIndex = getIndexFromCoords(i, j, cellsPerRow);
 
-                        // Add to cells list
-                        adjacentCellsIndex.push(cellIndex);
+                        // Translate index basic value and add to cells list
+                        adjacentCellsIndex.push(cellIndex + 1);
                     }
                 }
             }
@@ -151,7 +183,7 @@ const playGame = () => {
         
         // Get surround cells indexes
         const surroundCellsIndexes = getAdjacentCellsIndex(index, cellsPerRow);
-        console.log(surroundCellsIndexes);
+        
         // Get all cells
         const cells = document.querySelectorAll('.game-cell');
 
