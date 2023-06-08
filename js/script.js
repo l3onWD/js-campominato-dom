@@ -1,3 +1,7 @@
+/*
+    Se una cella viene cliccata controlla tutte le 8 celle circostanti e clicca tutte quelle senza bombe
+*/
+
 /* -----------------------------------------
 * FUNCTIONS
 -------------------------------------------*/

@@ -44,6 +44,7 @@
         - [bonus-s] _"Mostro tutte le celle"_
     - [ml-3] **ALTRIMENTI**
         - [ml-1] Aumento il punteggio
+        - [###] _"Mostra le celle adiacenti"_
         - [ml-4] **SE** _"il punteggio è uguale al punteggio massimo"_
             - [ml-5] Setto la partita come finita
             - _"Mostro un messaggio"_
@@ -77,4 +78,13 @@
         - **SE** _"la cella è una bomba"_
             - La segno come bomba
     - **FINE**
+- [###] **Mostra le celle adiacenti**_"dato il numero di cella e la lista di bombe"_
+    - Recupera le celle adiacenti
+    - **FINCHE** _"ho celle da scorrere"_
+        - Recupero la cella corrente
+        - **SE** _"non è una bomba"_ **E** _"non è già cliccata"_
+            - La segno come cliccata
+            - Aumento il punteggio
+    - **FINE**
+
 - **FINE**
