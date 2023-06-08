@@ -1,4 +1,4 @@
-# Griglia Campo Minato
+# Campo Minato
 
 <br>
 
@@ -23,6 +23,7 @@
     - [ml-2] Salvo le bombe generate
     - [ml-4] Calcolo il punteggio massimo
     - Svuoto la griglia
+    - [ml-5] Nascondo il messaggio nella modale
     - **FINCHE** _"non ho tutte le celle"_
         - _"Creo una cella"_
         - Appendo la cella alla griglia

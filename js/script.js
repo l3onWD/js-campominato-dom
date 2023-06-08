@@ -42,7 +42,7 @@ Al termine della partita, il software deve comunicare il punteggio, cioè il num
 const playGame = () => {
 
     /* --------------
-    * INNER FUNCTIONS
+    * FUNCTIONS
     ----------------*/
 
     //*** CREATE CELL ***//
@@ -86,23 +86,34 @@ const playGame = () => {
     //*** SHOW END MESSAGE ***//
     const showEndMessage = (score, hasWon) => {
 
-        let msg = `HAI VINTO!! Il tuo punteggio è ${score} punti!`;
-
+        // Prepare paragraphs
+        let msg = '<p class="mb-2">HAI VINTO!!</p>';
+        const scoreMsg = `<p>Il tuo punteggio è ${score} punti!</p>`
+        
         // Check if is a victory or a lost
-        if(!hasWon) msg = `HAI PERSO!! Il tuo punteggio è ${score} punti!`;
+        if(!hasWon) msg = '<p class="mb-2">HAI PERSO!!</p>';
+
+        // Create message
+        msg += scoreMsg;
 
         // Show message
-        console.log(msg);
+        //console.log(msg);
+        messageElem.innerHTML = msg;
+        messageElem.classList.add('show');
     }
 
 
     //*** ON CELL CLICK ***//
     const onCellClick = (ev) => {
 
+        //*** CHECK IF GAME ENDED ***//
+        if(gameEnded) return;
+
+
+        //*** CHECK IF CLICKED ***//
         // Get current cell clicked
         const cell = ev.target;
 
-        //*** CHECK IF CLICKED ***//
         if(cell.classList.contains('clicked')) return;
 
         // Print content cell
@@ -110,6 +121,7 @@ const playGame = () => {
 
         // Change cell color
         cell.classList.add('clicked');
+
 
         //*** CHECK IF IS A BOMB ***//
         // Get cell number
@@ -119,6 +131,9 @@ const playGame = () => {
         if(bombs.includes(cellNumber)) {
 
             //*** GAME LOST ***//
+            // End Game
+            gameEnded = true;
+
             // Change cell color
             cell.classList.add('bomb');
 
@@ -131,8 +146,12 @@ const playGame = () => {
             // Increment score
             score++;
 
+
             //*** GAME WON ***//
             if(score === maxScore) {
+                // End Game
+                gameEnded = true;
+
                 // Show a message
                 showEndMessage(score, true);
             }
@@ -151,6 +170,9 @@ const playGame = () => {
 
     // Game bombs
     const maxBombs = 16;
+
+    // Game Status
+    let gameEnded = false;
 
 
     //*** GET DIFFICULTY INPUT ***//
@@ -193,6 +215,9 @@ const playGame = () => {
     // Delete all previous cells
     gridElem.innerHTML = '';
 
+    // Hide game messages
+    messageElem.classList.remove('show');
+
 
     /* --------------
     * LOGIC
@@ -224,6 +249,7 @@ const playGame = () => {
 const difficultyElem = document.getElementById('game-difficulty');
 const playBtn = document.getElementById('game-play-btn');
 const gridElem = document.getElementById('game-grid');
+const messageElem = document.getElementById('game-message');
 
 
 //*** PARAMETERS ***//
@@ -238,6 +264,7 @@ console.log('### Elementi DOM:');
 console.log('Select: ' + difficultyElem);
 console.log('Bottone: ' + playBtn);
 console.log('Grid: ' + gridElem);
+console.log('Modale: ' + messageElem);
 console.log('----------- INIT DONE -----------');
 
 
