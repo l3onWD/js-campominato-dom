@@ -17,6 +17,7 @@
         - Le celle per lato sono 7
     - Calcolo la grandezza delle celle
     - Calcolo il numero di celle
+    - [ml-4] Calcolo il punteggiomassimo
     - [ml-2] _"Genero 16 bombe"_
     - [ml-2] Salvo le bombe generate
     - Svuoto la griglia
@@ -36,6 +37,8 @@
         - _"Mostro un messaggio"_
     - [ml-3] **ALTRIMENTI**
         - [ml-1] Aumento il punteggio
+        - [ml-4] **SE** _"il punteggio è uguale al punteggio massimo"_
+            - _"Mostro un messaggio"_
     - **FINE**
 - **Creo una cella** _"data la grandezza e un numero"_
     - Creo un elemento
