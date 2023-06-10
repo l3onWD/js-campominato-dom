@@ -104,7 +104,7 @@ const playGame = () => {
         * FUNCTIONS
         ----------------*/
 
-        //*** GET ADJACENT CELLS INDEX ***//
+        //*** GET CELLS BLOCK INDEX ***//
         const getCellsBlockIndex = (cellIndex, cols) => {
 
             /* --------------
@@ -132,7 +132,7 @@ const playGame = () => {
             * INIT
             ----------------*/
 
-            let adjacentCellsIndex = [];
+            let cellsBlockIndex = [];
 
             // Get coords from index
             const coords = getCoordsFromIndex(cellIndex, cols);
@@ -158,12 +158,31 @@ const playGame = () => {
                         const currentCellIndex = getIndexFromCoords(i, j, cols);
 
                         // Add to cells list
-                        adjacentCellsIndex.push(currentCellIndex);
+                        cellsBlockIndex.push(currentCellIndex);
                     }
                 }
             }
             
-            return adjacentCellsIndex;
+            return cellsBlockIndex;
+        }
+
+
+        //*** GET BOMB PROXIMITY ***//
+        const getBombProximity = (cellsBlockIndex, bombs) => {
+
+            let bombProximityNum = 0;
+
+            for (let i = 0; i < cellsBlockIndex.length; i++) {
+
+                const currentCellIndex = cellsBlockIndex[i];
+                
+                // Check if is cliccable
+                if(bombs.includes(currentCellIndex)) bombProximityNum ++
+                
+            }
+
+            return bombProximityNum;
+
         }
 
 
@@ -192,6 +211,12 @@ const playGame = () => {
 
                 // Click the cell
                 currentCell.classList.add('clicked');
+
+                // Calculate bomb proximity
+                const currentCellsBlockIndex = getCellsBlockIndex(currentCellIndex, cellsPerRow);
+                const bombProximityNum = getBombProximity(currentCellsBlockIndex, bombs);
+
+                currentCell.innerText = bombProximityNum ? bombProximityNum : '';
 
                 // Add to score
                 score++;
