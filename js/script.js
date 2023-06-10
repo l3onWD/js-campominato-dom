@@ -21,7 +21,7 @@ const playGame = () => {
     
         // Set properties
         cell.classList.add('game-cell');
-        cell.append(index + 1);
+        //cell.append(index + 1);
         cell.dataset.index = index;
         
         return cell;
@@ -93,8 +93,8 @@ const playGame = () => {
     }
 
 
-    //*** SHOW ADJACENT CELLS ***//
-    const showAdjacentCells = (cellIndex, bombs, cols) => {
+    //*** SHOW CELLS BLOCK ***//
+    const showCellsBlock = (cellIndex, bombs) => {
 
         /* EXTERNAL VARIABLES
             - cellsPerRow
@@ -105,7 +105,7 @@ const playGame = () => {
         ----------------*/
 
         //*** GET ADJACENT CELLS INDEX ***//
-        const getAdjacentCellsIndex = (cellIndex, cols) => {
+        const getCellsBlockIndex = (cellIndex, cols) => {
 
             /* --------------
             * FUNCTIONS
@@ -132,6 +132,8 @@ const playGame = () => {
             * INIT
             ----------------*/
 
+            let adjacentCellsIndex = [];
+
             // Get coords from index
             const coords = getCoordsFromIndex(cellIndex, cols);
 
@@ -143,8 +145,6 @@ const playGame = () => {
             /* --------------
             * LOGIC
             ----------------*/
-            // Get cells
-            let adjacentCellsIndex = [];
 
             // Cicle through adjacent cells (3x3)
             for (let i = row - 1; i <= row + 1; i++) {
@@ -171,8 +171,8 @@ const playGame = () => {
         * INIT
         ----------------*/
         
-        // Get surround cells indexes (current cell included)
-        const surroundCellsIndexes = getAdjacentCellsIndex(cellIndex, cellsPerRow);
+        // Get cells block indexes (current cell included)
+        const cellsBlockIndex = getCellsBlockIndex(cellIndex, cellsPerRow);
 
         // Get all cells
         const cells = document.querySelectorAll('.game-cell');
@@ -182,9 +182,9 @@ const playGame = () => {
         * LOGIC
         ----------------*/
 
-        for (let i = 0; i < surroundCellsIndexes.length; i++) {
+        for (let i = 0; i < cellsBlockIndex.length; i++) {
 
-            const currentCellIndex = surroundCellsIndexes[i];
+            const currentCellIndex = cellsBlockIndex[i];
             const currentCell = cells[currentCellIndex];
             
             // Check if is cliccable
@@ -221,12 +221,6 @@ const playGame = () => {
 
         if(cell.classList.contains('clicked')) return;
 
-        // Print content cell
-        //console.log(cell.innerText);
-
-        // Change cell color
-        cell.classList.add('clicked');
-
 
         //*** CHECK IF IS A BOMB ***//
         // Get cell number
@@ -247,18 +241,20 @@ const playGame = () => {
 
         } // Is a normal cell 
         else {
-            
-            // Increment score
-            score++;
 
-            // Show adjacent cells 
-            showAdjacentCells(cellNumber, bombs);
+
+            // Show cells block
+            showCellsBlock(cellNumber, bombs);
             console.log('Score: ' + score);
 
+            
             //*** GAME WON ***//
             if(score === maxScore) {
                 // End Game
                 gameEnded = true;
+
+                // Show all cells
+                showAllCells(bombs);
 
                 // Show a message
                 showEndMessage(score, true);
