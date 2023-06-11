@@ -46,6 +46,12 @@ select {
 /* -----------------------------------------
 * UTILS
 -------------------------------------------*/
+/*** DISPLAY ***/
+.d-none {
+    display: none;
+}
+
+
 /*** MARGIN ***/
 /* Left */
 .ml-1 {
@@ -154,9 +160,23 @@ header > * {
 /*** MAIN CONTENT ***/
 main {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: var(--col-cyan);
+}
+
+
+/*** GAME SCORE ***/
+#game-score {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+
+    color: var(--col-secondary);
+    background-color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid lightgrey;
 }
 
 
@@ -165,6 +185,7 @@ main {
     width: var(--grid-size);
     height: var(--grid-size);
 
+    flex-shrink: 0;
     display: flex;
     flex-wrap: wrap;
 }

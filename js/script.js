@@ -281,7 +281,6 @@ const playGame = () => {
 
             // Show cell
             showCell(cellNumber, bombs);
-            console.log('Score: ' + score);
 
             
             //*** GAME WON ***//
@@ -296,6 +295,9 @@ const playGame = () => {
                 showEndMessage(score, true);
             }
         }
+
+        // Show score
+        scoreElem.innerText = score;
         
     }
 
@@ -363,6 +365,10 @@ const playGame = () => {
     // Hide game messages
     messageElem.classList.remove('show');
 
+    // Show score
+    scoreElem.innerText = score;
+    scoreElem.classList.remove('d-none');
+
     // Change Button text
     playBtn.innerText = 'Ricomincia';
 
@@ -398,6 +404,7 @@ const difficultyElem = document.getElementById('game-difficulty');
 const playBtn = document.getElementById('game-play-btn');
 const gridElem = document.getElementById('game-grid');
 const messageElem = document.getElementById('game-message');
+const scoreElem = document.getElementById('game-score');
 
 
 // ! Log
@@ -407,6 +414,7 @@ console.log('Select: ' + difficultyElem);
 console.log('Bottone: ' + playBtn);
 console.log('Grid: ' + gridElem);
 console.log('Modale: ' + messageElem);
+console.log('Punteggio: ' + scoreElem);
 console.log('----------- INIT DONE -----------');
 
 
