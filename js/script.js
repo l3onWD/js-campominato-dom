@@ -1,7 +1,3 @@
-/*
-    Se una cella viene cliccata controlla tutte le 8 celle circostanti e clicca tutte quelle senza bombe
-*/
-
 /* -----------------------------------------
 * FUNCTIONS
 -------------------------------------------*/
@@ -71,128 +67,140 @@ const playGame = () => {
         messageElem.classList.add('show');
     }
 
-
-    //*** SHOW ALL CELLS ***//
-    const showAllCells = (bombs) => {
-
-        // Get all cells
-        const cells = document.querySelectorAll('.game-cell');
-
-        // Show all cells
-        for (let i = 0; i < cells.length; i++) {
-
-            // Get current cell data
-            const cell = cells[i];
-            const cellNumber = parseInt(cell.dataset.index);
-
-            // Change properties
-            cell.classList.add('clicked');// is clicked
-
-            if(bombs.includes(cellNumber)) cell.classList.add('bomb');// is a bomb
-        }
-    }
-
-
-    //*** SHOW CELLS BLOCK ***//
-    const showCellsBlock = (cellIndex, bombs) => {
-
-        /* EXTERNAL VARIABLES
-            - cellsPerRow
-        */
+    //*** GET ADJACENT CELLS INDEX ***//
+    const getAdjacentCellsIndex = (cellIndex, cols) => {
 
         /* --------------
         * FUNCTIONS
         ----------------*/
 
-        //*** GET CELLS BLOCK INDEX ***//
-        const getCellsBlockIndex = (cellIndex, cols) => {
+        //*** GET COORDS FROM INDEX ***//
+        const getCoordsFromIndex = (index, cols) => {
+            const row = Math.floor(index / cols);
+            const col = index % cols;
 
-            /* --------------
-            * FUNCTIONS
-            ----------------*/
-
-            //*** GET COORDS FROM INDEX ***//
-            const getCoordsFromIndex = (index, cols) => {
-                const row = Math.floor(index / cols);
-                const col = index % cols;
-
-                return [row, col];
-            }
-
-
-            //*** GET INDEX FROM COORDS ***//
-            const getIndexFromCoords = (row, col, cols) => row * cols + col;
-
-
-            //*** IS INSIDE GRID ***//
-            const isInsideGrid = (row, col, rowMax, colMax) => row >= 0 && row < rowMax && col >= 0 && col < colMax;
-
-
-            /* --------------
-            * INIT
-            ----------------*/
-
-            let cellsBlockIndex = [];
-
-            // Get coords from index
-            const coords = getCoordsFromIndex(cellIndex, cols);
-
-            // Get row and col
-            const row = coords[0];
-            const col = coords[1];
-
-
-            /* --------------
-            * LOGIC
-            ----------------*/
-
-            // Cicle through adjacent cells (3x3)
-            for (let i = row - 1; i <= row + 1; i++) {
-                
-                for (let j = col - 1; j <= col + 1; j++) {
-
-                    // Check if index is inside the grid
-                    if(isInsideGrid(i, j, cols, cols)) {
-
-                        // Get index from coords
-                        const currentCellIndex = getIndexFromCoords(i, j, cols);
-
-                        // Add to cells list
-                        cellsBlockIndex.push(currentCellIndex);
-                    }
-                }
-            }
-            
-            return cellsBlockIndex;
+            return [row, col];
         }
 
 
-        //*** GET BOMB PROXIMITY ***//
-        const getBombProximity = (cellsBlockIndex, bombs) => {
+        //*** GET INDEX FROM COORDS ***//
+        const getIndexFromCoords = (row, col, cols) => row * cols + col;
 
-            let bombProximityNum = 0;
 
-            for (let i = 0; i < cellsBlockIndex.length; i++) {
-
-                const currentCellIndex = cellsBlockIndex[i];
-                
-                // Check if is cliccable
-                if(bombs.includes(currentCellIndex)) bombProximityNum ++
-                
-            }
-
-            return bombProximityNum;
-
-        }
+        //*** IS INSIDE GRID ***//
+        const isInsideGrid = (row, col, rowMax, colMax) => row >= 0 && row < rowMax && col >= 0 && col < colMax;
 
 
         /* --------------
         * INIT
         ----------------*/
-        
-        // Get cells block indexes (current cell included)
-        const cellsBlockIndex = getCellsBlockIndex(cellIndex, cellsPerRow);
 
+        let adjacentCellsIndex = [];
+
+        // Get cell coords from index
+        const coords = getCoordsFromIndex(cellIndex, cols);
+
+        // Get cell row and col
+        const row = coords[0];
+        const col = coords[1];
+
+
+        /* --------------
+        * LOGIC
+        ----------------*/
+
+        // Cicle through adjacent cells (3x3)
+        for (let i = row - 1; i <= row + 1; i++) {
+            
+            for (let j = col - 1; j <= col + 1; j++) {
+
+                // Check if index is inside the grid
+                if(isInsideGrid(i, j, cols, cols)) {
+
+                    // Get current cell index from coords
+                    const currentCellIndex = getIndexFromCoords(i, j, cols);
+
+                    // Add to cells list
+                    adjacentCellsIndex.push(currentCellIndex);
+                }
+            }
+        }
+        
+        return adjacentCellsIndex;
+    }
+
+
+    //*** GET BOMB PROXIMITY ***//
+    const getBombProximity = (cellsIndex, bombs) => {
+
+        let bombProximityNum = 0;
+
+        for (let i = 0; i < cellsIndex.length; i++) {
+
+            const currentCellIndex = cellsIndex[i];
+            
+            // Check if is a bomb
+            if(bombs.includes(currentCellIndex)) bombProximityNum ++
+            
+        }
+
+        return bombProximityNum;
+
+    }
+
+
+    //*** SHOW CELL ***//
+    const showCell = (cellIndex, bombs) => {
+
+        /* --------------
+        * INIT
+        ----------------*/
+        // Get cell data
+        const cells = document.querySelectorAll('.game-cell');
+        const cell = cells[cellIndex];
+        const adjacentCellsIndex = getAdjacentCellsIndex(cellIndex, cellsPerRow);
+
+
+        /* --------------
+        * LOGIC
+        ----------------*/
+        // Click cell
+        cell.classList.add('clicked');
+
+        // Add to score
+        score++;
+
+        // Calculate bomb proximity
+        const bombProximityNum = getBombProximity(adjacentCellsIndex, bombs);
+
+        cell.innerText = bombProximityNum;
+
+        // Auto click empty cells
+        if(bombProximityNum === 0) {
+
+            cell.innerText = '';
+
+            for (let i = 0; i < adjacentCellsIndex.length; i++) {
+
+                const adjacentCellIndex = adjacentCellsIndex[i];
+                const adjacentCell = cells[adjacentCellIndex];
+
+                const isClicked = adjacentCell.classList.contains('clicked');
+
+                if (!isClicked) showCell(adjacentCellIndex, bombs);// ! recursion
+            }
+            
+        }
+
+    }
+
+
+    //*** SHOW ALL CELLS ***//
+    const showAllCells = (bombs) => {
+
+        /* --------------
+        * INIT
+        ----------------*/
         // Get all cells
         const cells = document.querySelectorAll('.game-cell');
 
@@ -200,28 +208,31 @@ const playGame = () => {
         /* --------------
         * LOGIC
         ----------------*/
+        for (let i = 0; i < cells.length; i++) {
 
-        for (let i = 0; i < cellsBlockIndex.length; i++) {
+            // Get current cell data
+            const currentCell = cells[i];
+            const currentCellIndex = parseInt(currentCell.dataset.index);
+            const adjacentCellsIndex = getAdjacentCellsIndex(currentCellIndex, cellsPerRow);
 
-            const currentCellIndex = cellsBlockIndex[i];
-            const currentCell = cells[currentCellIndex];
-            
-            // Check if is cliccable
-            if(!currentCell.classList.contains('clicked') &&  !bombs.includes(currentCellIndex)) {
+            // Click cell
+            currentCell.classList.add('clicked');// is clicked
 
-                // Click the cell
-                currentCell.classList.add('clicked');
+            // Check if is a bomb
+            if(bombs.includes(currentCellIndex)) {
+
+                currentCell.classList.add('bomb');
+
+            } else {
 
                 // Calculate bomb proximity
-                const currentCellsBlockIndex = getCellsBlockIndex(currentCellIndex, cellsPerRow);
-                const bombProximityNum = getBombProximity(currentCellsBlockIndex, bombs);
+                const bombProximityNum = getBombProximity(adjacentCellsIndex, bombs);
 
-                currentCell.innerText = bombProximityNum ? bombProximityNum : '';
+                currentCell.innerText = bombProximityNum;
 
-                // Add to score
-                score++;
+                if(bombProximityNum === 0) currentCell.innerText = '';
+
             }
-            
         }
     }
 
@@ -268,8 +279,8 @@ const playGame = () => {
         else {
 
 
-            // Show cells block
-            showCellsBlock(cellNumber, bombs);
+            // Show cell
+            showCell(cellNumber, bombs);
             console.log('Score: ' + score);
 
             
