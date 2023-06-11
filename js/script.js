@@ -48,6 +48,17 @@ const playGame = () => {
     }
 
 
+    //*** GET FORMATTED SCORE ***//
+    const getFormattedScore = (score) => {
+
+        const hundreds = Math.floor(score / 100);
+        const tens = Math.floor((score % 100) / 10);
+        const unit = score % 10;
+
+        return `${hundreds}${tens}${unit}`;
+    }
+
+
     //*** ON CELL CLICK ***//
     const onCellClick = (ev) => {
 
@@ -297,7 +308,7 @@ const playGame = () => {
         }
 
         // Show score
-        scoreElem.innerText = score;
+        scoreElem.innerText = getFormattedScore(score);
         
     }
 
@@ -366,7 +377,7 @@ const playGame = () => {
     messageElem.classList.remove('show');
 
     // Show score
-    scoreElem.innerText = score;
+    scoreElem.innerText = getFormattedScore(score);
     scoreElem.classList.remove('d-none');
 
     // Change Button text
